@@ -1,0 +1,68 @@
+<div class="row content-wrapper">
+  <div class="col-md-2 sidebar">
+    <div class="menu-wrapper">
+      <div class="menu-button-wrapper text-right">
+        <button class="btn btn-default menu-button" (click)="toggle()">
+          <fa-icon icon="bars"></fa-icon>
+        </button>
+      </div>
+      <div class="menu-content-wrapper" [ngClass]="{collapse: collapsed}">
+        <h4 class="menu-title">Menu</h4>
+        <ul class="menu-list">
+          <li><a>Dashboard</a></li>
+          <li><a>Profile</a></li>
+          <li><a>Settings</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-10 content">
+    <div class="row">
+      <div class="col-md-7 card-wrapper" style="width: 100%">
+        <div class="card-content">
+          <h5 class="card-title">Real time incidents</h5>
+          <iframe width="100%" height="100%"
+            src="https://maps.google.com/maps?width=100%&height=600&hl=es&q=La%20Nave%20Madrid+(La%20Nave)&ie=UTF8&t=&z=14&iwloc=B&output=embed"
+            frameborder="0" scrolling="no" marginheight="0" marginwidth="0"><a
+              href="https://www.mapsdirections.info/calcular-ruta.html">mapas y direcciones</a></iframe>
+        </div>
+      </div>
+      <div class="col-md-5 card-wrapper">
+        <div class="card-content">
+          <h5 class="card-title">Incident rates</h5>
+          <div class="vertical-center">
+            <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
+              [legend]="barChartLegend" [chartType]="barChartType"></canvas>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 card-wrapper">
+        <div class="card-content">
+          <h5 class="card-title">History</h5>
+          <ngx-datatable class="material" [rows]="history_rows" [loadingIndicator]="loadingIndicator"
+            [columns]="history_columns" [columnMode]="'force'" [headerHeight]="36" [footerHeight]="36" [rowHeight]="50"
+            [rowHeight]="'auto'" [reorderable]="reorderable" [limit]="5">
+          </ngx-datatable>
+        </div>
+      </div>
+      <div class="col-md-6 card-wrapper">
+        <div class="card-content">
+          <h5 class="card-title">Archive</h5>
+          <ngx-datatable class="material" [rows]="archive_rows" [loadingIndicator]="loadingIndicator"
+            [columns]="archive_columns" [columnMode]="'flex'" [headerHeight]="36" [footerHeight]="36" [rowHeight]="50"
+            [rowHeight]="'auto'" [reorderable]="reorderable" [limit]="5">
+
+            <!-- Column Templates -->
+            <ngx-datatable-column name="Type" [flexGrow]="0">
+              <ng-template let-value="value" ngx-datatable-cell-template>
+                <fa-icon class="fa-lg" icon="{{value}}"></fa-icon>
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Name" [flexGrow]="1"></ngx-datatable-column>
+            <ngx-datatable-column name="Date" [flexGrow]="1"></ngx-datatable-column>
+          </ngx-datatable>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
