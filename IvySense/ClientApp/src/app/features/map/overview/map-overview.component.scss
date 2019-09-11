@@ -1,0 +1,79 @@
+.terms-overview-main {
+  .details {
+    position: relative;
+    p {
+      font-weight: bolder;
+
+      span {
+        margin-right: 6px;
+        font-weight: lighter;
+      }
+    }
+    .details-image-container {
+      width: 100%;
+      img {
+        width: 100%;
+      }
+    }
+    .details-image-labels {
+      position: absolute;
+      text-align: center;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      left: 0;
+
+      .details-image-labels-button {
+        background: white;
+        padding: 25px;
+
+        &:hover{
+          background: #efefef;
+          cursor: pointer;
+        }
+      }
+
+      div {
+        font-family: "Patua One", cursive;
+        text-transform:uppercase;
+        font-weight: bold;
+      }
+
+      div:nth-child(1) {
+        padding-top: 12%;
+        padding-left: 20%;
+      }
+
+      div:nth-child(2) {
+        padding-top: 11%;
+        padding-left: 11%;
+      }
+
+      div:nth-child(3) {
+        padding-top: 11%;
+        padding-left: 9%;
+      }
+
+      div:nth-child(4) {
+        padding-top: 14%;
+    padding-left: 20%;
+      }
+
+      div:nth-child(5) {
+        padding-top: 15%;
+      padding-left: 19%;
+      }
+
+      div:nth-child(6) {
+        padding-top: 9%;
+        padding-left: 9%;
+      }
+    }
+  }
+
+  .terms {
+    .subtitle {
+      margin-bottom: 30px;
+    }
+  }
+}

@@ -1,0 +1,40 @@
+@import "~src/styles/scss/partials/colors";
+
+.home-intro-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 100px;
+
+  .home-intro-header {
+    text-align: center;
+
+    .home-intro-logo {
+      width: 50%;
+    }
+  }
+
+  .home-intro-info {
+    
+
+    .home-intro-info-header {
+      margin-bottom: 20px;
+    }
+
+    .home-intro-info-list {
+      li {
+        margin: 12px 0;
+
+        span {
+          margin-right: 12px;
+          color: $palette-color-3;
+        }
+      }
+    }
+  }
+
+  .home-intro-terms-search {
+    max-width: 840px;
+    width: 100%;
+  }
+}

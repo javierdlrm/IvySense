@@ -1,0 +1,39 @@
+<main class="terms-overview-main">
+
+  <section class="info">
+    <h1 class="title">{{ roomName }}</h1>
+    <h5 class="subsubtitle">Energy consumption</h5>
+    <div ngbDropdown class="d-inline-block info-dropdown">
+      <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Select room</button>
+      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+        <button (click)="roomSelected('House')" ngbDropdownItem>All house</button>
+        <button (click)="roomSelected('Bedroom 1')" ngbDropdownItem>Bedroom 1</button>
+        <button (click)="roomSelected('Kitchen')" ngbDropdownItem>Kitchen</button>
+        <button (click)="roomSelected('Bathroom')" ngbDropdownItem>Bathroom</button>
+        <button (click)="roomSelected('Bedroom 2')" ngbDropdownItem>Bedroom 2</button>
+        <button (click)="roomSelected('Bedroom 3')" ngbDropdownItem>Bedroom 3</button>
+        <button (click)="roomSelected('Living room')" ngbDropdownItem>Living room</button>
+      </div>
+    </div>
+  </section>
+
+  <section *ngIf="subject?.source" class="details">
+    <div class="d-flex justify-content-around">
+      <p><span>{{ 'url' | translate }}:</span>{{subject.source.url}}</p>
+      <p><span>{{ 'entity' | translate }}:</span>{{subject.source.entity.name}}</p>
+      <p><span>{{ 'category' | translate }}:</span>{{subject.source.entity.category}}</p>
+    </div>
+  </section>
+
+  <section class="terms row no-gutters">
+    <!-- <h3 class="subtitle col-12">{{ 'termsAndConditions' | translate }}</h3> -->
+    <section class="summary" [ngClass]="{'col-12': layout === 'summary', 'col-4': layout === 'detail'}">
+      <terms-grid [terms]="terms" [oneColumn]="layout !== 'summary'" (categorySelected)="categorySelected($event)">
+      </terms-grid>
+    </section>
+    <section *ngIf="termsCategory" class="detail col-8">
+      <terms-detail [category]="termsCategory" (close)="closeDetail()"></terms-detail>
+    </section>
+  </section>
+
+</main>

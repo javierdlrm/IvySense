@@ -1,17 +1,35 @@
 {
-    "extends": "../tslint.json",
-    "rules": {
-        "directive-selector": [
-            true,
-            "attribute",
-            "app",
-            "camelCase"
-        ],
-        "component-selector": [
-            true,
-            "element",
-            "app",
-            "kebab-case"
-        ]
-    }
+  "extends": "../tslint.json",
+  "rules": {
+    "directive-selector": [
+      true,
+      "attribute",
+      [
+        "overview",
+        "user",
+        "info",
+        "core",
+        "shared",
+        "app"
+      ],
+      "camelCase"
+    ],
+    "component-selector": [
+      true,
+      "element",
+      [
+        "home",
+        "terms",
+        "map",
+        "rec",
+        "user",
+        "info",
+        "auth",
+        "core",
+        "shared",
+        "app"
+      ],
+      "kebab-case"
+    ]
+  }
 }
