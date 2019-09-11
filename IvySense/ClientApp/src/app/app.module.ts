@@ -1,49 +1,60 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
+import { NgModule, APP_INITIALIZER, ErrorHandler } from '@angular/core';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { ApplicationInsightsModule, AppInsightsService } from '@markpieszak/ng-application-insights';
 
-import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
-import { CitizenComponent } from './citizen/citizen.component';
-import { SecurityForceComponent } from './security-force/security-force.component';
+import { AppCommonModule } from '@app/app-common.module';
+import { AppComponent } from '@app/app.component';
+import { BootstrapperService } from '@core/bootstrapper/bootstrapper.service';
+import { environment } from '@src/environments/environment';
+import { AppInsightsLoggerService } from '@core/logger/appinsights.logger.service';
+import { ConsoleLoggerService } from '@core/logger/console.logger.service';
+import { LoggerService } from '@core/logger/logger.service';
+import { ErrorHandlerLoggerService } from '@core/logger/error-handler.logger.service';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 
-import { ChartsModule } from 'ng4-charts/ng4-charts';
-import { NgxDatatableModule } from '@swimlane/ngx-datatable';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+// Base url
+export function getBaseUrl() { return document.getElementsByTagName('base')[0].href; }
+const BaseUrlProvider = { provide: 'BASE_URL', useFactory: getBaseUrl, deps: [] };
 
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faFolder } from '@fortawesome/free-solid-svg-icons';
-import { faVideo } from '@fortawesome/free-solid-svg-icons';
-import { faImage } from '@fortawesome/free-solid-svg-icons';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
+// Internationalization
+export function HttpLoaderFactory(httpClient: HttpClient) {
+  return new TranslateHttpLoader(httpClient, getBaseUrl() + 'assets/i18n/', '-lang.json');
+}
 
-// Add an icon to the library for convenient access in other components
-library.add(faFolder, faImage, faVideo, faBars);
-
+// Bootstrapper
+export function boot(bootstrapper: BootstrapperService) {
+  return (): Promise<any> => {
+    return bootstrapper.init();
+  };
+}
 
 @NgModule({
   declarations: [
-    AppComponent,
-    HomeComponent,
-    CitizenComponent,
-    SecurityForceComponent
+    AppComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
-    FormsModule,
-    ChartsModule,
-    NgxDatatableModule,
-    FontAwesomeModule,
-    RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'citizen', component: CitizenComponent },
-      { path: 'security-force', component: SecurityForceComponent }
-    ])
+    AppCommonModule,
+    ApplicationInsightsModule.forRoot({
+      instrumentationKeySetLater: true
+    }),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
   ],
-  providers: [],
+  providers: [
+    BaseUrlProvider, AppInsightsService,
+    { provide: APP_INITIALIZER, useFactory: boot, deps: [BootstrapperService], multi: true },
+    { provide: ErrorHandler, useClass: ErrorHandlerLoggerService },
+    { provide: LoggerService, useClass: environment.production ? AppInsightsLoggerService : ConsoleLoggerService }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

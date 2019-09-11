@@ -1,0 +1,92 @@
+@import "~src/styles/scss/partials/colors";
+
+a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+.box-shadow {
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.05);
+  -webkit-box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.05);
+}
+
+.sign-in-text {
+  color: $palette-color-3 !important;
+
+  &:hover {
+    color: $palette-color-2 !important;
+  }
+}
+
+.button-menu {
+  border: none;
+}
+
+.button-alert {
+  margin-left: 40px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.navbar-nav {
+  flex: 0;
+
+  li a {
+    white-space: nowrap;
+  }
+}
+
+.navbar-form {
+  flex: 1;
+  margin: 0 3rem;
+  opacity: 0;
+}
+
+.navbar-lang,
+.navbar-lang label {
+  margin: 0 0 0 4px;
+}
+
+.sidebar {
+  background: white;
+  border-left: 1px solid #dee2e6;
+  padding: 24px;
+  top: 0;
+  position: absolute;
+  right: 0;
+  height: 100%;
+  z-index: 99999;
+
+  .sidebar-header {
+    margin-bottom: 20px;
+
+    .sidebar-close {
+      position: absolute;
+      right: 0;
+      top: 0;
+      margin: 17px;
+    }
+  }
+
+  .sidebar-accordion {
+    margin-top: 120px;
+
+    .sidebar-accordion-header {
+      color: black;
+      font-weight: bold;
+    }
+    .sidebar-accordion-icon {
+      margin-right: 18px;
+      display: inline-block;
+    }
+
+    ul {
+      margin: 0;
+      padding: 0;
+    }
+  }
+}
