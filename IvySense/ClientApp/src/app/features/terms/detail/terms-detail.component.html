@@ -11,15 +11,7 @@
         </div>
         <div class="terms-detail-body">
             <div class="terms-detail-concepts">
-                <ul>
-                    <li *ngFor="let concept of category.concepts">
-                        <p>
-                            <fa-icon [icon]="['fas', 'circle']"></fa-icon>
-                            {{ concept.description }}
-                            <span *ngIf="concept.period" class="period">{{ concept.period }}</span>
-                        </p>
-                    </li>
-                </ul>
+                <img src="assets/images/chart.png" class="w-100"/>
             </div>
         </div>
     </div>
